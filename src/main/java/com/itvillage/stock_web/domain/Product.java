@@ -7,9 +7,9 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Products {
+public class Product {
     private Long product_id;
     private String product_name;
     private String product_barcode;
-    private String stock_quantity;
+    private int stock_quantity;
 }

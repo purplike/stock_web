@@ -1,14 +1,18 @@
 package com.itvillage.stock_web;
 
-import com.itvillage.stock_web.domain.Products;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import com.itvillage.stock_web.domain.Product;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
-public interface ProductsMapper {
-    @Select("SELECT * FROM products WHERE product_id = #{product_id}")
-    Products getProduct(@Param("product_id") Long product_id);
+public interface ProductMapper {
 
-    Products findById(Long product_id);
+    @Select("SELECT * FROM products WHERE product_id = #{product_id}")
+    Product getProduct(@Param("product_id") Long product_id);
+
+    @Insert("INSERT INTO product (product_name, product_barcode, stock_quantity) values (#{product_name}, #{product_barcode}, #{stock_quantity})")
+    @Options(useGeneratedKeys = true, keyProperty = "product_id")
+    int insert(@Param("product") Product product);
+
+    Product findById(Long product_id);
+    void save(Product product);
 }
